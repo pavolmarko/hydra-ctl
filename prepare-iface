@@ -1,0 +1,13 @@
+#!/bin/bash
+IFNAME="$1"
+PHY="$2"
+ADDR="$3"
+CHANNEL="$4"
+PANID="$5"
+
+ip link set "${IFNAME}" down
+iwpan phy "${PHY}" set channel 0 "${CHANNEL}"
+iwpan dev "${IFNAME}" set pan_id "${PANID}"
+iwpan dev "${IFNAME}" set short_addr "${ADDR}"
+ip link set "${IFNAME}" up
+
